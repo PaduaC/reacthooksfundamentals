@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const [count, setCount] = useState(0);
+
+  const numberOfDrinks = () => {
+    setCount(count + 1);
+    if (count === 2) {
+      alert("You drink wayyyy too much caffeine, Please stop");
+    } else if (count >= 4) {
+      alert("Srsly stop. You need to see a doctor!");
+    }
+  };
+
+  let content = (
+    <div>
+      <p>Number of times I get up to make a cup of coffee: {count}</p>
+      <button onClick={numberOfDrinks}>Click me!</button>
     </div>
   );
+  return content;
 }
 
 export default App;
