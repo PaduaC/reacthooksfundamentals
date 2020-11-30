@@ -1,21 +1,20 @@
 import React, { useState } from "react";
-
+import { useForm } from "./useForm";
 function App() {
-  const [count, setCount] = useState(0);
-
-  const numberOfDrinks = () => {
-    setCount(count + 1);
-    if (count === 2) {
-      alert("You drink wayyyy too much caffeine, Please stop");
-    } else if (count >= 4) {
-      alert("Srsly stop. You need to see a doctor!");
-    }
-  };
+  // useState returns an array
+  // This is too time consuming so we should create a custom hook
+  // The use from hook enables us to update the email and password with less code
+  const [values, handleChange] = useForm({ email: "", password: "" });
 
   let content = (
     <div>
-      <p>Number of times I get up to make a cup of coffee: {count}</p>
-      <button onClick={numberOfDrinks}>Click me!</button>
+      <input name="email" value={values.email} onChange={handleChange} />
+      <input
+        type="password"
+        name="password"
+        value={values.password}
+        onChange={handleChange}
+      />
     </div>
   );
   return content;
