@@ -14,19 +14,27 @@ function App() {
   // const [showHello, setShowHello] = useState(true);
   // useEffect hook
   // This function gets called every time a component gets rendered
+  // useEffect(() => {
+  //   // This work the same as componentDidMount() and componentWillUnmount()
+  //   // Event listener for mouse movement
+  //   const onMouseMove = (e) => {
+  //     console.log(e);
+  //   };
+  //   window.addEventListener("mousemove", onMouseMove);
+
+  //   return () => {
+  //     window.removeEventListener("mousemove", onMouseMove);
+  //   };
+  // }, [values.email]);
+
+  /* You can have multiple instances of useEffect */
   useEffect(() => {
-    // This work the same as componentDidMount() and componentWillUnmount()
+    console.log("mount1");
+  }, []);
+  useEffect(() => {
+    console.log("mount2");
+  }, []);
 
-    // Event listener for mouse movement
-    const onMouseMove = (e) => {
-      console.log(e);
-    };
-    window.addEventListener("mousemove", onMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-    };
-  }, [values.email]);
   let content = (
     <div>
       {/* The ! negates setShowHello() */}
