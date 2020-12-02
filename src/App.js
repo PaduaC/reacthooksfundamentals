@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "./useForm";
+import { Hello } from "./Hello";
 function App() {
   // useState returns an array
   // This is too time consuming so we should create a custom hook
@@ -9,14 +10,22 @@ function App() {
     password: "",
     firstName: "",
   });
+
+  const [showHello, setShowHello] = useState(true);
   // useEffect hook
   // This function gets called every time a component gets rendered
-  useEffect(() => {
-    console.log("rendered");
-    // The dependency array allows you to trigger an effect based on the value that is changed
-  }, [values.email, values.password]);
+  // useEffect(() => {
+  //   // This work the same as componentDidMount() and componentWillUnmount()
+  //   console.log("render");
+  //   return () => {
+  //     console.log("unmount");
+  //   };
+  // }, []);
   let content = (
     <div>
+      {/* The ! negates setShowHello() */}
+      <button onClick={() => setShowHello(!showHello)}>Click me</button>
+      {showHello && <Hello />}
       <input
         name="firstName"
         placeholder="First Name"
