@@ -11,21 +11,21 @@ function App() {
     firstName: "",
   });
 
-  const [showHello, setShowHello] = useState(true);
+  // const [showHello, setShowHello] = useState(true);
   // useEffect hook
   // This function gets called every time a component gets rendered
-  // useEffect(() => {
-  //   // This work the same as componentDidMount() and componentWillUnmount()
-  //   console.log("render");
-  //   return () => {
-  //     console.log("unmount");
-  //   };
-  // }, []);
+  useEffect(() => {
+    // This work the same as componentDidMount() and componentWillUnmount()
+    console.log("render");
+    return () => {
+      console.log("unmount");
+    };
+  }, []);
   let content = (
     <div>
       {/* The ! negates setShowHello() */}
-      <button onClick={() => setShowHello(!showHello)}>Click me</button>
-      {showHello && <Hello />}
+      {/* <button onClick={() => setShowHello(!showHello)}>Click me</button> */}
+      {/* {showHello && <Hello />} */}
       <input
         name="firstName"
         placeholder="First Name"
