@@ -16,11 +16,17 @@ function App() {
   // This function gets called every time a component gets rendered
   useEffect(() => {
     // This work the same as componentDidMount() and componentWillUnmount()
-    console.log("render");
-    return () => {
-      console.log("unmount");
+
+    // Event listener for mouse movement
+    const onMouseMove = (e) => {
+      console.log(e);
     };
-  }, []);
+    window.addEventListener("mousemove", onMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", onMouseMove);
+    };
+  }, [values.email]);
   let content = (
     <div>
       {/* The ! negates setShowHello() */}
