@@ -45,28 +45,6 @@ function App() {
       <div>count: {count}</div>
       <button onClick={() => setCount((c) => c + 1)}>increment</button>
       <button onClick={() => setCount((c) => c - 1)}>decrement</button>
-      {/* The ! negates setShowHello() */}
-      {/* <button onClick={() => setShowHello(!showHello)}>Click me</button> */}
-      {/* {showHello && <Hello />} */}
-      {/* <input
-        name="firstName"
-        placeholder="First Name"
-        value={values.firstName}
-        onChange={handleChange}
-      />
-      <input
-        name="email"
-        value={values.email}
-        onChange={handleChange}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        name="password"
-        value={values.password}
-        onChange={handleChange}
-        placeholder="Password"
-      /> */}
     </div>
   );
   return content;
