@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "./useForm";
 import { Hello } from "./Hello";
+import { useFetch } from "./useFetch";
+
 function App() {
   // useState returns an array
   // This is too time consuming so we should create a custom hook
@@ -10,37 +12,43 @@ function App() {
     password: "",
     firstName: "",
   });
+  // The initial value is now based in the localStorage
+  // Remember to use the initializer function of useState to avoid re-rendering every count
+  const [count, setCount] = useState(() =>
+    JSON.parse(localStorage.getItem("count"))
+  );
+  const { data, loading } = useFetch(`http://numbersapi.com/${count}/trivia`);
 
-  // const [showHello, setShowHello] = useState(true);
-  // useEffect hook
-  // This function gets called every time a component gets rendered
-  // useEffect(() => {
-  //   // This work the same as componentDidMount() and componentWillUnmount()
-  //   // Event listener for mouse movement
-  //   const onMouseMove = (e) => {
-  //     console.log(e);
-  //   };
-  //   window.addEventListener("mousemove", onMouseMove);
+  // Create a cache
+  const storeCache = () => {
+    let cacheName = "userInput";
+    let url = `http://numbersapi.com/${count}/trivia`;
+    caches.open(cacheName).then((cache) => {
+      cache.add(url).then(() => {
+        console.log(data);
+      });
+    });
+  };
 
-  //   return () => {
-  //     window.removeEventListener("mousemove", onMouseMove);
-  //   };
-  // }, [values.email]);
+  storeCache();
 
-  /* You can have multiple instances of useEffect */
+  // How to save the state
+  // Let's say we persist the value of count
+  // The count will stay the same after the page is refreshed
   useEffect(() => {
-    console.log("mount1");
-  }, []);
-  useEffect(() => {
-    console.log("mount2");
-  }, []);
+    localStorage.setItem("count", JSON.stringify(count));
+  }, [count]);
 
   let content = (
     <div>
+      <h2>{!data ? "loading..." : data}</h2>
+      <div>count: {count}</div>
+      <button onClick={() => setCount((c) => c + 1)}>increment</button>
+      <button onClick={() => setCount((c) => c - 1)}>decrement</button>
       {/* The ! negates setShowHello() */}
       {/* <button onClick={() => setShowHello(!showHello)}>Click me</button> */}
       {/* {showHello && <Hello />} */}
-      <input
+      {/* <input
         name="firstName"
         placeholder="First Name"
         value={values.firstName}
@@ -58,7 +66,7 @@ function App() {
         value={values.password}
         onChange={handleChange}
         placeholder="Password"
-      />
+      /> */}
     </div>
   );
   return content;
